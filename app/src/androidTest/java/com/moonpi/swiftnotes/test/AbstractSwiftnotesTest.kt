@@ -30,7 +30,7 @@ abstract class AbstractSwiftnotesTest {
         @JvmStatic
         @BeforeClass
         fun clearAllureReports() {
-            File(ALLURE_DIR_PATH).listFiles().forEach {
+            File(ALLURE_DIR_PATH).listFiles()?.forEach {
                 it.delete()
             }
             Log.d("Setup", "Allure reports have been cleared")

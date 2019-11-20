@@ -8,6 +8,7 @@ import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.moonpi.swiftnotes.MainActivity
 import com.moonpi.swiftnotes.R
+import com.moonpi.swiftnotes.rule.SwiftnotesRule
 import org.hamcrest.CoreMatchers.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -21,12 +22,12 @@ import ru.tinkoff.allure.step
 class SimpleTest : AbstractSwiftnotesTest() {
 
     @get:Rule
-    val rule = ActivityTestRule<MainActivity>(MainActivity::class.java, false, false)
+    val rule = SwiftnotesRule(MainActivity::class.java, false)
 
     @Test
     @DisplayName("Проверка открытия страницы создания")
     fun newNoteHints() {
-        rule.launchActivity(null)
+        rule.launchActivity()
         step("Проверяем отображение страницы") {
             onView(withId(R.id.newNote)).perform(click())
             onView(allOf(withId(R.id.titleEdit), isDisplayed())).check(matches(withHint("Title")))
